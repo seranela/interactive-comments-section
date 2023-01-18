@@ -516,7 +516,7 @@
 	/* --- Data Functions --- */
 
 	function loadJSON() {
-		fetch('../data.json')
+		fetch('data.json')
 			.then((response) => response.json())
 			.then((json) => {
 				localStorage.setItem('interactive-comments-section', JSON.stringify(json));
