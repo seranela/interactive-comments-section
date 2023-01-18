@@ -55,6 +55,8 @@ body {
 	font: 400 1rem var(--font-base);
 	text-rendering: optimizeSpeed;
 	min-height: 100vh;
+	display: grid;
+	place-items: center;
 }
 
 main {
