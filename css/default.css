@@ -75,6 +75,18 @@ main {
 	gap: 1rem;
 }
 
+.replies {
+	border-left: 2px solid var(--color-neutral-light-gray);
+	padding-left: 1rem;
+}
+
+.comment,
+.reply {
+	background-color: var(--color-neutral-white);
+	padding: 1.5rem;
+	border-radius: 10px;
+}
+
 .comment {
 	display: grid;
 	grid-template-areas:
@@ -85,99 +97,6 @@ main {
 	grid-template-rows: fit-content(100%) fit-content(100%);
 	align-items: center;
 	gap: 0.5rem 1.5rem;
-	background-color: var(--color-neutral-white);
-	padding: 1.5rem;
-	border-radius: 10px;
-}
-
-.reply {
-	background-color: var(--color-neutral-white);
-	padding: 1.5rem;
-	border-radius: 10px;
-}
-
-.reply-form {
-	display: grid;
-	grid-template-areas:
-		'reply-avatar reply-text reply-button';
-	grid-template-columns: fit-content(100%) 1fr fit-content(100%);
-	align-items: flex-start;
-	gap: 1rem;
-	width: 100%;
-}
-
-.reply-form-bottom {
-	display: grid;
-	grid-template-areas:
-		'reply-text reply-text reply-text'
-		'comment-avatar . reply-button';
-	grid-template-columns: fit-content(100%) 1fr fit-content(100%);
-	align-items: center;
-	gap: 1rem;
-	width: 100%;
-}
-
-.edit-form {
-	grid-area: comment;
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-	width: 100%;
-}
-
-.reply-avatar {
-	grid-area: reply-avatar;
-	width: 2.5rem;
-	min-width: 2.5rem;
-}
-
-.reply-text {
-	grid-area: reply-text;
-	font: inherit;
-	line-height: 1.5;
-	flex: 1;
-	border: 2px solid var(--color-neutral-light-gray);
-	color: var(--color-neutral-dark-blue);
-	border-radius: 8px;
-	padding: 0.7em 1em;
-}
-
-.reply-text::placeholder {
-	color: var(--color-neutral-gray-blue);
-}
-
-.reply-button,
-.update-button {
-	grid-area: reply-button;
-	font: inherit;
-	background-color: var(--color-primary-moderate-blue);
-	color: var(--color-neutral-white);
-	border: 0;
-	border-radius: 8px;
-	padding: 0.8em 1.2em;
-	text-transform: uppercase;
-	cursor: pointer;
-	transition: background-color 0.2s;
-}
-
-.update-button {
-	align-self: flex-end;
-}
-
-.reply-button:hover {
-	background-color: var(--color-primary-light-gray-blue);
-}
-
-.replies {
-	border-left: 2px solid var(--color-neutral-light-gray);
-	padding-left: 1rem;
-}
-
-.replyto-username {
-	text-decoration: none;
-	font-weight: 500;
-	position: relative;
-	color: var(--color-primary-moderate-blue);
 }
 
 .comment-header {
@@ -348,6 +267,87 @@ main {
 	filter: brightness(190%);
 }
 
+/* Input Forms */
+
+.reply-form {
+	display: grid;
+	grid-template-areas:
+		'reply-avatar reply-text reply-button';
+	grid-template-columns: fit-content(100%) 1fr fit-content(100%);
+	align-items: flex-start;
+	gap: 1rem;
+	width: 100%;
+}
+
+.add-comment-form {
+	display: grid;
+	grid-template-areas:
+		'reply-text reply-text reply-text'
+		'comment-avatar . reply-button';
+	grid-template-columns: fit-content(100%) 1fr fit-content(100%);
+	align-items: center;
+	gap: 1rem;
+	width: 100%;
+}
+
+.edit-form {
+	grid-area: comment;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	width: 100%;
+}
+
+.reply-avatar {
+	grid-area: reply-avatar;
+	width: 2.5rem;
+	min-width: 2.5rem;
+}
+
+.reply-text {
+	grid-area: reply-text;
+	font: inherit;
+	line-height: 1.5;
+	flex: 1;
+	border: 2px solid var(--color-neutral-light-gray);
+	color: var(--color-neutral-dark-blue);
+	border-radius: 8px;
+	padding: 0.7em 1em;
+}
+
+.reply-text::placeholder {
+	color: var(--color-neutral-gray-blue);
+}
+
+.replyto-username {
+	text-decoration: none;
+	font-weight: 500;
+	position: relative;
+	color: var(--color-primary-moderate-blue);
+}
+
+.reply-button,
+.update-button {
+	grid-area: reply-button;
+	font: inherit;
+	background-color: var(--color-primary-moderate-blue);
+	color: var(--color-neutral-white);
+	border: 0;
+	border-radius: 8px;
+	padding: 0.8em 1.2em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.update-button {
+	align-self: flex-end;
+}
+
+.reply-button:hover {
+	background-color: var(--color-primary-light-gray-blue);
+}
+
 /* Modal */
 
 .modal-container {
@@ -454,16 +454,7 @@ main {
 		padding-left: 2.5rem;
 	}
 
-	/*.reply-form {
-		grid-template-areas:
-			'reply-text reply-text'
-			'reply-avatar reply-button';
-		grid-template-columns: auto fit-content(100%);
-		grid-template-rows: fit-content(100%) fit-content(100%);
-		align-items: center;
-	}*/
-
-	.reply-form-bottom {
+	.add-comment-form {
 		grid-template-areas:
 			'reply-avatar reply-text reply-button';
 		align-items: flex-start;

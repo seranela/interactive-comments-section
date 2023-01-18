@@ -1,10 +1,13 @@
 (() => {
+	// Main data object for processing and then saving to localStorage
 	let data = {};
+
+	// Keep track of last ID when needing to create new comment entries
 	let lastId = 0;
 
 	/* --- Comment - Add (Shown at bottom of page) --- */
 
-	function replyFormBottomSend(e) {
+	function onClickSend(e) {
 		e.preventDefault();
 
 		// Increment the last ID since a new posting has been made
@@ -43,7 +46,7 @@
 
 	/* --- Comment - Edit --- */
 
-	function submitEdit(e) {
+	function onSubmitEdit(e) {
 		e.preventDefault();
 
 		let commentText = e.target.querySelector('.reply-text').value.trim();
@@ -94,7 +97,7 @@
 		saveData(data);
 	}
 
-	function editComment(e) {
+	function onClickEdit(e) {
 		const currentComment = e.target.parentNode.parentNode;
 
 		const commentText = currentComment.querySelector('.comment-text');
@@ -104,7 +107,7 @@
 		editForm.className = 'edit-form';
 		editForm.setAttribute('action', '#');
 		editForm.setAttribute('method', 'post');
-		editForm.addEventListener('submit', submitEdit, false);
+		editForm.addEventListener('submit', onSubmitEdit, false);
 
 		// Comment heading title
 		const headingTitle = document.createElement('h2');
@@ -128,7 +131,7 @@
 
 	/* --- Modal - Delete Comment --- */
 
-	function deleteConfirmed(e) {
+	function onClickDeleteConfirmed(e) {
 		const currentComment = e.target.parentNode.parentNode;
 		const currentCommentId = parseInt(currentComment.id.split('-')[1]);
 		const commentContainer = currentComment.parentNode;
@@ -164,7 +167,7 @@
 		saveData(data);
 	}
 
-	function deleteComment(e) {
+	function onClickDelete(e) {
 		// Prevent the body in the background from scrolling while modal is visible
 		document.body.style = 'overflow: hidden;';
 
@@ -178,7 +181,7 @@
 			modalConfirmDelete.classList.add('hidden');
 			modalConfirmDelete.setAttribute('aria-hidden', 'true');
 			document.body.style = '';
-			deleteConfirmed(e);
+			onClickDeleteConfirmed(e);
 		});
 		modalConfirmDelete.querySelector('.cancel-button').addEventListener('click', () => {
 			modalConfirmDelete.classList.add('hidden');
@@ -189,7 +192,7 @@
 
 	/* --- Comment - Likes --- */
 
-	function updateScore(commentId, isIncreased) {
+	function onClickUpdateScore(commentId, isIncreased) {
 		const inputLikes = document.getElementById('likes-' + commentId);
 		console.log(commentId);
 
@@ -230,7 +233,7 @@
 
 	/* --- Comment - Reply --- */
 
-	function submitReply(e) {
+	function onSubmitReply(e) {
 		e.preventDefault();
 
 		// Increment the last ID since a new posting has been made
@@ -286,7 +289,7 @@
 		e.target.parentNode.remove();
 	}
 
-	function replyComment(e) {
+	function onClickReply(e) {
 		const data = loadData();
 
 		// Reply container
@@ -304,7 +307,7 @@
 		replyForm.className = 'reply-form';
 		replyForm.setAttribute('action', '#');
 		replyForm.setAttribute('method', 'post');
-		replyForm.addEventListener('submit', submitReply, false);
+		replyForm.addEventListener('submit', onSubmitReply, false);
 
 		// User avatar picture
 		const avatar = document.createElement('img');
@@ -417,7 +420,7 @@
 		likesAdd.classList.add('comment-likes-button', 'comment-likes-button-plus');
 		likesAdd.innerHTML = '&plus;';
 		likesAdd.addEventListener('click', () => {
-			updateScore(dataItem.id, true);
+			onClickUpdateScore(dataItem.id, true);
 		}, false);
 		likesContainer.appendChild(likesAdd);
 
@@ -444,7 +447,7 @@
 		likesSubtract.classList.add('comment-likes-button', 'comment-likes-button-minus');
 		likesSubtract.innerHTML = '&ndash;';
 		likesSubtract.addEventListener('click', () => {
-			updateScore(dataItem.id, false);
+			onClickUpdateScore(dataItem.id, false);
 		}, false);
 		likesContainer.appendChild(likesSubtract);
 
@@ -462,21 +465,21 @@
 			const actionDelete = document.createElement('button');
 			actionDelete.classList.add('action-button', 'action-delete');
 			actionDelete.innerText = 'Delete';
-			actionDelete.addEventListener('click', deleteComment, false);
+			actionDelete.addEventListener('click', onClickDelete, false);
 			actionsContainer.appendChild(actionDelete);
 
 			// Custom action - Edit
 			const actionEdit = document.createElement('button');
 			actionEdit.classList.add('action-button', 'action-edit');
 			actionEdit.innerText = 'Edit';
-			actionEdit.addEventListener('click', editComment, false);
+			actionEdit.addEventListener('click', onClickEdit, false);
 			actionsContainer.appendChild(actionEdit);
 		} else {
 			// Custom action - Reply
 			const actionReply = document.createElement('button');
 			actionReply.classList.add('action-button', 'action-reply');
 			actionReply.innerText = 'Reply';
-			actionReply.addEventListener('click', replyComment, false);
+			actionReply.addEventListener('click', onClickReply, false);
 			actionsContainer.appendChild(actionReply);
 		}
 
@@ -540,8 +543,8 @@
 
 	//localStorage.clear();  // Clear persistent data for testing
 
-	document.getElementById('reply-form-bottom-send')
-		.addEventListener('click', replyFormBottomSend, false);
+	document.getElementById('send-button')
+		.addEventListener('click', onClickSend, false);
 
 	// If data doesn't exist in localStorage, load it.
 	if (!localStorage.getItem('interactive-comments-section')) {
