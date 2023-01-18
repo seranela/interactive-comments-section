@@ -171,15 +171,18 @@
 		// Make modal visible
 		const modalConfirmDelete = document.getElementById('modal-confirm-delete');
 		modalConfirmDelete.classList.remove('hidden');
+		modalConfirmDelete.setAttribute('aria-hidden', 'false');
 
 		// Add events for modal buttons
 		modalConfirmDelete.querySelector('.confirm-button').addEventListener('click', () => {
 			modalConfirmDelete.classList.add('hidden');
+			modalConfirmDelete.setAttribute('aria-hidden', 'true');
 			document.body.style = '';
 			deleteConfirmed(e);
 		});
 		modalConfirmDelete.querySelector('.cancel-button').addEventListener('click', () => {
 			modalConfirmDelete.classList.add('hidden');
+			modalConfirmDelete.setAttribute('aria-hidden', 'true');
 			document.body.style = '';
 		});
 	}
