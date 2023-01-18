@@ -5,6 +5,19 @@
 	// Keep track of last ID when needing to create new comment entries
 	let lastId = 0;
 
+	/* --- Transitions --- */
+
+	function onAnimationEnd_add(e) {
+		e.target.classList.remove('fade-in');
+	}
+
+	function onAnimationEnd_remove(e, commentsContainer) {
+		e.target.classList.remove('fade-out');
+		e.target.remove();
+		if (commentsContainer.children.length === 0)
+			commentsContainer.remove();
+	}
+
 	/* --- Comment - Add (Shown at bottom of page) --- */
 
 	function onClickSend(e) {
@@ -134,10 +147,13 @@
 	function onClickDeleteConfirmed(e) {
 		const currentComment = e.target.parentNode.parentNode;
 		const currentCommentId = parseInt(currentComment.id.split('-')[1]);
-		const commentContainer = currentComment.parentNode;
+		const commentsContainer = currentComment.parentNode;
 
 		// Remove comment from DOM
-		currentComment.remove();
+		currentComment.classList.add('fade-out');
+		currentComment.addEventListener('animationend', (e) => {
+			onAnimationEnd_remove(e, commentsContainer);
+		}, false);
 
 		// Remove comment from localStorage
 		let matchFound = false;
@@ -160,9 +176,6 @@
 
 			if (matchFound) break;
 		}
-
-		if (commentContainer.children.length === 0)
-			commentContainer.remove();
 
 		saveData(data);
 	}
@@ -294,7 +307,9 @@
 
 		// Reply container
 		const reply = document.createElement('div');
-		reply.className = 'reply';
+		reply.classList.add('reply', 'fade-in');
+		reply.addEventListener('animationend', onAnimationEnd_add, false);
+		//reply.className = 'reply';
 
 		// Comment heading title
 		const headingTitle = document.createElement('h3');
@@ -350,7 +365,8 @@
 		// Comment container
 		const comment = document.createElement('article');
 		comment.id = 'comment-' + dataItem.id;
-		comment.className = 'comment';
+		comment.classList.add('comment', 'fade-in');
+		comment.addEventListener('animationend', onAnimationEnd_add, false);
 		{
 			const dataId = parseInt(dataItem.id);
 			if (dataId > lastId)
