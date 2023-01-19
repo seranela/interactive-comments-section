@@ -14,10 +14,6 @@
 
 	/* Fonts */
 	--font-base: 'Rubik', sans-serif; /* Weights: 400, 500, 700 */
-
-	/* Spacing */
-	--max-content-width: 69rem;
-	--spacing-page-side: 1.4rem;
 }
 
 /* Resets */
