@@ -28,6 +28,7 @@ html {
 	box-sizing: inherit;
 }
 
+body,
 h1,
 h2 {
 	margin: 0;
@@ -37,10 +38,6 @@ img {
 	display: block;
 	max-width: 100%;
 	height: auto;
-}
-
-body {
-	margin: 0;
 }
 
 /* Base */
