@@ -5,6 +5,34 @@
 	// Keep track of last ID when needing to create new comment entries
 	let lastId = 0;
 
+	/* --- Date-friendly Conversion --- */
+
+	function convertDateToFriendlyFormat(postDate) {
+		const currentDate = new Date();
+		const diffInTime = currentDate.getTime() - postDate.getTime();
+		const diffInDays = diffInTime / (1000 * 3600 * 24);
+
+		if (diffInDays >= 365) {
+			const years = Math.round(diffInDays / 365);
+			const yearsLabel = (years > 1 ? 'years' : 'year');
+			return `${years} ${yearsLabel} ago`;
+		} else if (diffInDays >= 30) {
+			const months = Math.round(diffInDays / 30);
+			const monthsLabel = (months > 1 ? 'months' : 'month');
+			return `${months} ${monthsLabel} ago`;
+		} else if (diffInDays >= 7) {
+			const weeks = Math.round(diffInDays / 7);
+			const weeksLabel = (weeks > 1 ? 'weeks' : 'week');
+			return `${weeks} ${weeksLabel} ago`;
+		} else if (diffInDays >= 1) {
+			const days = Math.round(diffInDays);
+			const daysLabel = (days > 1 ? 'days' : 'day');
+			return `${days} ${daysLabel} ago`;
+		} else if (diffInDays === 0) {
+			return 'Today';
+		}
+	}
+
 	/* --- Transitions --- */
 
 	function onAnimationEnd_add(e) {
@@ -410,7 +438,8 @@
 		// Posted date
 		const postedDate = document.createElement('p');
 		const date = new Date(parseInt(dataItem.createdAt));
-		postedDate.innerText = date.toLocaleDateString('en-US');
+		//postedDate.innerText = date.toLocaleDateString('en-US');
+		postedDate.innerText = convertDateToFriendlyFormat(date);
 		postedDate.className = 'comment-posted';
 		header.appendChild(postedDate);
 

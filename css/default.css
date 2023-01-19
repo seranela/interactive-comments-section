@@ -95,7 +95,7 @@ main {
 		'header header header'
 		'comment comment comment'
 		'likes actions actions';
-	grid-template-columns: fit-content(100%) auto fit-content(100%);
+	grid-template-columns: fit-content(100%) 1fr fit-content(100%);
 	grid-template-rows: fit-content(100%) fit-content(100%);
 	align-items: center;
 	gap: 0.5rem 1.5rem;
