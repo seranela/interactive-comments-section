@@ -45,6 +45,8 @@ Users should be able to:
 
 The responsive layout was rather straightforward. Although, implementing the functionality was more involved. Using vanilla JavaScript, I roughed together each component into a working state. It's not fancy, but it works. Had to download Firefox Developer edition so I could have a browser without setting modifications and "hardening" done to it. I would like to refactor this into something more efficient while adding that fancy flair to it. I'll need to research further into this.
 
+Update: I've added the extra flair to the comments as they're added and removed from the DOM. I created animation transitions classes that are added to the elements when needed. After the transition end event fires, it will remove the class and, where appropriate, remove the element from DOM.
+
 ## Author
 
 - Frontend Mentor - [@seranela](https://www.frontendmentor.io/profile/seranela)
