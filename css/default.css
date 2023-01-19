@@ -64,7 +64,7 @@ main {
 	gap: 1rem;
 	grid-template-columns: 1fr;
 	width: 100%;
-	max-width: 59rem;
+	max-width: 48rem;
 	padding: 1rem;
 }
 
